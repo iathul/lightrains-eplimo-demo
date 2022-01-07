@@ -1,9 +1,9 @@
-# API Boilerplate
+# Eplimo API
 
 ## Features
 
 - Fastify framework
-- `fluent-schema` for payload validation
+- `fluent-json-schema` for payload validation
 - Mongoose for db modelling
 - JWT for Authentication
 - CORS Support
@@ -21,8 +21,8 @@
 
 ### install necessary dependencies
 
-- Run `git clone git@github.com:lightrainstech/api-boilerplate.git`
-- Run `cd api-boilerplate`
+- Run `git clone git@github.com:iathul/lightrains-eplimo-demo.git`
+- Run `cd api-lightrains-eplimo-demo`
 - Run `nvm use`
 - Run `yarn`
 
@@ -46,39 +46,35 @@ Swagger is available at http://HOST:PORT/docs
 
 ```
 .
-├── .github
-│   └── workflows
-│       └── deploy-master.yml
-├── .gitignore
-├── .gitlab-ci.yml
-├── .nvmrc
-├── LICENSE
-├── README.md
 ├── deploy
-│   ├── deploy.sh
-│   ├── disableHostKeyChecking.sh
-│   └── updateAndRestart.sh
+│   ├── deploy.sh
+│   ├── disableHostKeyChecking.sh
+│   └── updateAndRestart.sh
 ├── env.sample
+├── LICENSE
 ├── package.json
 ├── pm2.json
+├── README.md
 ├── src
-│   ├── app.js
-│   ├── config
-│   │   └── swagger.js
-│   ├── models
-│   │   └── userModel.js
-│   ├── plugins
-│   │   ├── README.md
-│   │   ├── authJwt.js
-│   │   ├── mongo.js
-│   │   └── responseApi.js
-│   ├── schema
-│   │   └── userSchema.js
-│   ├── server.js
-│   ├── services
-│   │   └── auth.js
-│   └── utils
-│       ├── generatorResponse.js
-│       └── index.js
+│   ├── app.js
+│   ├── config
+│   │   └── swagger.js
+│   ├── models
+│   │   └── userModel.js
+│   ├── plugins
+│   │   ├── authJwt.js
+│   │   ├── mongo.js
+│   │   ├── README.md
+│   │   └── responseApi.js
+│   ├── schema
+│   │   └── userSchema.js
+│   ├── server.js
+│   ├── services
+│   │   ├── auth.js
+│   │   └── user.js
+│   └── utils
+│       ├── email.js
+│       ├── generatorResponse.js
+│       └── index.js
 └── yarn.lock
 ```
