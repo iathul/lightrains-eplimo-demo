@@ -26,7 +26,7 @@ module.exports = async function (fastify, opts) {
     { schema: userRegistrationSchema },
     async function(request, reply) {
       try {
-        const { firstName, lastName, email, phoneNumber, password } = request.body
+        const { firstName, lastName, role, email, phoneNumber, password } = request.body
 
         // Create unique username
         const userName = getUserName(firstName, lastName)
@@ -38,6 +38,7 @@ module.exports = async function (fastify, opts) {
           firstName: firstName,
           lastName: lastName,
           userName: userName,
+          role: role,
           email: email,
           phoneNumber: phoneNumber,
           password: password,
@@ -120,10 +121,14 @@ module.exports = async function (fastify, opts) {
         if (!user.autheticate(password)) {
           return reply.error({ message: 'Invalid Password'})
         }
+        // Check verified or not
+        if (!user.isVerified) {
+          return reply.error({ message: 'Please verify your email.'})
+        }
         else {
           // Create JWT token
           const token = fastify.jwt.sign(
-            { userName: user.userName  }, 
+            { userName: user.userName, role: user.role }, 
             process.env.JWT_SECRET, 
             { expiresIn: process.env.TOKEN_EXPIRESIN }
         )
@@ -174,10 +179,8 @@ module.exports = async function (fastify, opts) {
     async function(request, reply) {
       try {
         const { otp, newPassword } = request.body
-        console.log(otp.toString())
-  
         const userModel = new User()
-        const user = await userModel.getUserByOtp(otp.toString())
+        const user = await userModel.getUserByOtp(otp)
 
         if(!user){ 
           return reply.error({ message: "Invalid OTP" })

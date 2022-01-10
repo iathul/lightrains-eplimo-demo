@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: ''
+      required: true
     },
     profile: {
       type: Mixed
