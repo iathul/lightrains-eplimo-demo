@@ -25,7 +25,7 @@ exports.isOtpExpired = (createdTime) => {
   let status = false
   let duration = moment.duration(moment().diff(createdTime))
   let minutes = duration.asMinutes()
-  if(minutes > 5) {
+  if(minutes > process.env.OTP_EXPIRESIN) {
     status = true
   }
   return status
@@ -35,8 +35,8 @@ exports.isOtpExpired = (createdTime) => {
 exports.transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD
+    user: process.env.NODEMAILER_EMAIL,
+    pass: process.env.NODEMAILER_PASSWORD
   }
 })
 

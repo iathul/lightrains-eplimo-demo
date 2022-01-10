@@ -3,7 +3,7 @@ const { transporter } = require('../utils/index')
 // Account verification
 exports.sendVerificationEmail = async (user, otp) => {
     var mailOptions = {
-        from: process.env.Email,   
+        from: process.env.NODEMAILER_EMAIL,   
         to: user.email,
         subject: 'Verify your account',
         html: `<h3> Hi ${user.firstName}, </h3>
@@ -22,7 +22,7 @@ exports.sendVerificationEmail = async (user, otp) => {
 // Forgot password email
 exports.sendForgotPasswordEmail = async (user, otp) => {
     var mailOptions = {
-        from: process.env.Email,   
+        from: process.env.NODEMAILER_EMAIL,   
         to: user.email,
         subject: 'Reset password',
         html: `<h3> Hi ${user.firstName}, </h3>
