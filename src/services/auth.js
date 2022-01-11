@@ -29,7 +29,7 @@ module.exports = async function (fastify, opts) {
         const { firstName, lastName, role, email, phoneNumber, password } = request.body
 
         // Create unique username
-        const userName = getUserName(firstName, lastName)
+        const userName = getUserName()
 
         // Generate otp
         const otp = generateOtp();

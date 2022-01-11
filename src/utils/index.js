@@ -2,8 +2,8 @@ const moment = require('moment')
 const nodemailer = require('nodemailer')
 
 // Create username
-exports.getUserName = (firstName, lastName) => {
-  let name = `ep_${firstName.toLowerCase()}${lastName.toLowerCase()}_${(Math.floor(Math.random() * 1000) + 1000).toString().substring(1)}`
+exports.getUserName = () => {
+  let name = `EP${Math.random().toString(36).substring(2, 9)}`
   return name
 }
 
