@@ -23,6 +23,7 @@
     "fastify-mongodb": "^4.1.1",
     "fastify-oas": "^3.0.8",
     "fastify-plugin": "^3.0.0",
+    "fastify-schema-constraint": "^2.0.0",
     "fastify-swagger": "^4.13.0",
     "fluent-json-schema": "^3.0.1",
     "lodash": "^4.17.21",

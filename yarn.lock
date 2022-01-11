@@ -653,10 +653,24 @@ fastify-oas@^3.0.8:
     js-yaml "^3.14.0"
     openapi3-ts "^1.4.0"
 
+fastify-plugin@^2.1.1:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-2.3.4.tgz#b17abdc36a97877d88101fb86ad8a07f2c07de87"
+  integrity sha512-I+Oaj6p9oiRozbam30sh39BiuiqBda7yK2nmSPVwDCfIBlKnT8YB3MY+pRQc2Fcd07bf6KPGklHJaQ2Qu81TYQ==
+  dependencies:
+    semver "^7.3.2"
+
 fastify-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-3.0.0.tgz#cf1b8c8098e3b5a7c8c30e6aeb06903370c054ca"
   integrity sha512-ZdCvKEEd92DNLps5n0v231Bha8bkz1DjnPP/aEz37rz/q42Z5JVLmgnqR4DYuNn3NXAO3IDCPyRvgvxtJ4Ym4w==
+
+fastify-schema-constraint@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-schema-constraint/-/fastify-schema-constraint-2.0.0.tgz#0b3831c6c9f77455905d3d52fed4c6cbe655ce1c"
+  integrity sha512-5Vkuz1U09MyFljgeYZi5Sbc8M39lJBkfW8zr/W7Erdxk3Mpq04oBILiujGvsMZG48aoSIN1Z6MLzEO3pppFQyQ==
+  dependencies:
+    fastify-plugin "^2.1.1"
 
 fastify-static@^3.3.0:
   version "3.4.0"

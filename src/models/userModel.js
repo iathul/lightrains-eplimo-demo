@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       index: {
         unique: true,
-        partialFilterExpression: {otp: {$type: "number"}}
+        partialFilterExpression: {otp: {$type: "string"}}
       },
     },
     otpCreatedAt: {
