@@ -56,7 +56,8 @@ module.exports = async function (fastify, opts) {
           await otpModel.save()
 
           reply.success({
-            message: 'Registration success.'
+            message: 'Registration success.',
+            data: newUser._id
           })
 
           // Send verification email
@@ -71,18 +72,19 @@ module.exports = async function (fastify, opts) {
   ),
     // Verify otp
     fastify.post(
-      '/verify',
+      '/verify/:id',
       { schema: validationSchema.userOtpVerificationSchema },
       async function (request, reply) {
         try {
           const { otp } = request.body
+          const { id } = request.params
           const otpModel = new OTP()
           const userModel = new User()
 
           // Check otp details
           const otpData = await otpModel.getOtpDetails(otp.toString())
-
-          if (!otpData) {
+        
+          if (!otpData || otpData.user.toString() !== id ) {
             return reply.error({ message: 'Invalid OTP' })
           }
 
@@ -91,6 +93,7 @@ module.exports = async function (fastify, opts) {
             reply.success({
               message: 'Verification success.'
             })
+            await otpData.remove()
           }
         } catch (err) {
           console.log(err)
@@ -190,6 +193,8 @@ module.exports = async function (fastify, opts) {
             message: 'User details.',
             data: otpData.user
           })
+          await otpData.remove()
+          
         } catch (err) {
           console.log(err)
           reply.error({ message: err.message })

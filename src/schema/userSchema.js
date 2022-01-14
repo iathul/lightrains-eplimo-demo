@@ -6,7 +6,10 @@ const registrationSchema = S.object()
   .prop('role', S.string().required())
   .prop('email', S.string().format(S.FORMATS.EMAIL).required())
   .prop('password', S.string().minLength(8).required())
-  .prop('phoneNumber', S.string().minLength(10).maxLength(20).pattern('^[0-9-+]{9,20}$').required())
+  .prop(
+    'phoneNumber',
+    S.string().minLength(10).maxLength(20).pattern('^[0-9-+]{9,20}$').required()
+  )
 
 exports.userRegistrationSchema = {
   tags: ['User'],
@@ -24,8 +27,7 @@ exports.userLoginSchema = {
   body: loginSchema
 }
 
-const otpVerificationSchema = S.object()
-  .prop('otp', S.string().required())
+const otpVerificationSchema = S.object().prop('otp', S.string().required())
 
 exports.userOtpVerificationSchema = {
   tags: ['User'],
@@ -33,8 +35,10 @@ exports.userOtpVerificationSchema = {
   body: otpVerificationSchema
 }
 
-const changePasswordSchema = S.object()
-  .prop('newPassword', S.string().minLength(8).required())
+const changePasswordSchema = S.object().prop(
+  'newPassword',
+  S.string().minLength(8).required()
+)
 
 exports.userChangePasswordSchema = {
   tags: ['User'],
@@ -42,8 +46,10 @@ exports.userChangePasswordSchema = {
   body: changePasswordSchema
 }
 
-const forgotPasswordSchema = S.object()
-  .prop('email', S.string().format(S.FORMATS.EMAIL).required())
+const forgotPasswordSchema = S.object().prop(
+  'email',
+  S.string().format(S.FORMATS.EMAIL).required()
+)
 
 exports.userForgotPasswordSchema = {
   tags: ['User'],
@@ -59,16 +65,46 @@ exports.validateUserSchema = {
   body: validateUser
 }
 
-const resetPasswordSchema = S.object()
-  .prop('newPassword', S.string().minLength(8).required())
+const resetPasswordSchema = S.object().prop(
+  'newPassword',
+  S.string().minLength(8).required()
+)
 
-const resetPswdParams = S.object()
-  .prop('id', S.string().maxLength(24).required())
+const resetPswdParams = S.object().prop(
+  'id',
+  S.string().maxLength(24).required()
+)
 
 exports.userResetPasswordSchema = {
   tags: ['User'],
   summary: 'Reset password',
   body: resetPasswordSchema,
   params: resetPswdParams
+}
+
+const profileValidationSchema = S.oneOf([
+  S.object()
+    .id('#doctor')
+    .prop(
+      'profile',
+      S.object()
+        .required()
+        .prop('qualification', S.string().required())
+        .prop('area_of_expertise', S.string().required())
+    ),
+  S.object()
+    .id('#fitness-trainer')
+    .prop(
+      'profile',
+      S.object()
+        .required()
+        .prop('total_training_experience', S.number().required())
+    )
+])
+
+exports.userprofileValidationSchema = {
+  tags: ['User'],
+  summary: 'Update user profile',
+  body: profileValidationSchema
 }
 

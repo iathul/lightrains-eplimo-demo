@@ -19,7 +19,7 @@ const otpSchema = new mongoose.Schema(
 )
 otpSchema.index(
   { createdAt: 1 },
-  { expireAfterSeconds: process.env.OTP_EXPIRESIN }
+  { expireAfterSeconds: 300 }
 )
 
 otpSchema.methods = {
