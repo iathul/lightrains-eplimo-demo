@@ -35,17 +35,6 @@ const UserSchema = new mongoose.Schema(
     profile: {
       type: Mixed
     },
-    otp:{
-      type: Number,
-      unique: true,
-      index: {
-        unique: true,
-        partialFilterExpression: {otp: {$type: "string"}}
-      },
-    },
-    otpCreatedAt: {
-      type: Date,
-    },
     isVerified: {
       type: Boolean,
       default: false
@@ -87,17 +76,10 @@ UserSchema.methods = {
     const User = userModel.findOne({userName: userName})
     return User
   },
-  getUserByOtp: async function (otp) {
+  verifyUser: async function (id) {
     const userModel = mongoose.model('User')
-    const User = userModel.findOne({otp: otp})
-    return User
-  },
-  verifyUser: async function (otp) {
-    const userModel = mongoose.model('User')
-    const verified = await userModel.findOneAndUpdate(
-      { otp: otp },
-      { isVerified: true, otp: null, otpCreatedAt: null },
-      { new: true }
+    const verified = await userModel.findByIdAndUpdate(id,
+      { isVerified: true}, { new: true }
     )
     return verified
   },
@@ -121,7 +103,7 @@ UserSchema.methods = {
 
 UserSchema.statics = {
   load: function (options, cb) {
-    options.select = options.select || 'email name'
+    options.select = options.select || '_id email name'
     return this.findOne(options.criteria).select(options.select).exec(cb)
   },
 

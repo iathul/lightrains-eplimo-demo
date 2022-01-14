@@ -25,7 +25,7 @@ exports.userLoginSchema = {
 }
 
 const otpVerificationSchema = S.object()
-  .prop('otp', S.number().required())
+  .prop('otp', S.string().required())
 
 exports.userOtpVerificationSchema = {
   tags: ['User'],
@@ -51,13 +51,24 @@ exports.userForgotPasswordSchema = {
   body: forgotPasswordSchema
 }
 
+const validateUser = S.object().prop('otp', S.string().required())
+
+exports.validateUserSchema = {
+  tags: ['User'],
+  summary: 'Validate user to update password',
+  body: validateUser
+}
+
 const resetPasswordSchema = S.object()
-  .prop('otp', S.number().required())
   .prop('newPassword', S.string().minLength(8).required())
+
+const resetPswdParams = S.object()
+  .prop('id', S.string().maxLength(24).required())
 
 exports.userResetPasswordSchema = {
   tags: ['User'],
   summary: 'Reset password',
-  body: resetPasswordSchema
+  body: resetPasswordSchema,
+  params: resetPswdParams
 }
 

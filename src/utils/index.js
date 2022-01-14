@@ -1,4 +1,3 @@
-const moment = require('moment')
 const nodemailer = require('nodemailer')
 
 // Create username
@@ -18,17 +17,6 @@ exports.generateOtp = () => {
     otp = otp + digits[index]
   }
   return otp
-}
-
-// Check otp expired or not
-exports.isOtpExpired = (createdTime) => {
-  let status = false
-  let duration = moment.duration(moment().diff(createdTime))
-  let minutes = duration.asMinutes()
-  if(minutes > process.env.OTP_EXPIRESIN) {
-    status = true
-  }
-  return status
 }
 
 // Nodemailer email transporter
