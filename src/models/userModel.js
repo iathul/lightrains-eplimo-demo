@@ -91,12 +91,12 @@ UserSchema.methods = {
 
   // Create hashed password
   securePassword: function(plainpassword){
-    if(!plainpassword) return "" 
+    if(!plainpassword) return "Plassword missing." 
       try {
         const hash = bcrypt.hashSync(plainpassword, 10)
         return hash
       } catch (error) {
-        return ""
+        return "Something went wrong. Please try again."
     }
   }
 }
